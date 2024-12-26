@@ -215,6 +215,12 @@ cache_write_count (void)
   return syscall0 (SYS_CACHE_WRITE_CNT);
 }
 
+uint32_t                              
+listing_file_access (void)
+{
+  return syscall0 (SYS_LISTING_FILES);
+}
+
 uint32_t
 cache_read_count (void)
 {

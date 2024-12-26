@@ -131,7 +131,7 @@ main (void)
 
   /* Run actions specified on kernel command line. */
   run_actions (argv);
-
+  printf ("Where are youuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu\n");
   /* Finish up. */
   shutdown ();
   thread_exit ();

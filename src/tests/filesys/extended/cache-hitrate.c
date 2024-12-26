@@ -16,6 +16,7 @@
 
 char buf[FILE_SIZE];
 
+
 void
 test_main (void)
 {
@@ -60,4 +61,7 @@ test_main (void)
   CHECK (new_hit * (hit + miss) > hit * (new_hit + new_miss), "Hit rate should grow.");
 
   CHECK (remove ("a"), "Removed \"a\".");
+  uint32_t list = listing_file_access ();
+  
+  msg("Listing file access: %d", list);
 }

@@ -36,7 +36,8 @@ enum
     SYS_CACHE_HIT,
     SYS_CACHE_MISS,
     SYS_CACHE_WRITE_CNT,
-    SYS_CACHE_READ_CNT
+    SYS_CACHE_READ_CNT,
+    SYS_LISTING_FILES,
   };
 
 #endif /* lib/syscall-nr.h */

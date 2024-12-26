@@ -46,6 +46,8 @@ static void cache_hit_syscall (struct intr_frame *);
 static void cache_miss_syscall (struct intr_frame *);
 static void cache_write_count_syscall (struct intr_frame *);
 static void cache_read_count_syscall (struct intr_frame *);
+static void listing_file_access_syscall (struct intr_frame *);
+
 
 void
 syscall_init (void)
@@ -248,6 +250,9 @@ syscall_handler (struct intr_frame *f)
         break;
       case SYS_CACHE_READ_CNT:
         cache_read_count_syscall (f);
+        break;
+      case SYS_LISTING_FILES:
+        listing_file_access_syscall(f);
         break;
       default:
         break;
@@ -547,6 +552,14 @@ cache_write_count_syscall (struct intr_frame *f)
 {
   f->eax = cache_write_count ();
 }
+
+static void
+listing_file_access_syscall (struct intr_frame *f UNUSED)
+{
+
+  f->eax = listing_file_access (); // Trả về số sector đã truy cập qua thanh ghi eax
+}
+
 
 static void
 cache_read_count_syscall (struct intr_frame *f)

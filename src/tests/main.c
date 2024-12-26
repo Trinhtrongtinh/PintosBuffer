@@ -10,6 +10,7 @@ main (int argc UNUSED, char *argv[])
   msg ("begin");
   random_init (0);
   test_main ();
+
   msg ("end");
   return 0;
 }

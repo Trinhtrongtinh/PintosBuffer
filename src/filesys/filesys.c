@@ -15,6 +15,7 @@ static void do_format (void);
 
 /* Initializes the file system module.
    If FORMAT is true, reformats the file system. */
+
 void
 filesys_init (bool format)
 {
@@ -132,3 +133,5 @@ do_format (void)
   free_map_close ();
   printf ("done.\n");
 }
+
+

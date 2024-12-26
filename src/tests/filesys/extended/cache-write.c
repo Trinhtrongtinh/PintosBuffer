@@ -44,4 +44,5 @@ test_main (void)
          "Block read count should be less than acceptable error %d.", ACCEPTABLE_ERROR);
 
   CHECK (remove ("a"), "Removed \"a\".");
+  listing_file_access ();
 }

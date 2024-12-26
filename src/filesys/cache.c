@@ -2,22 +2,32 @@
 #include <string.h>
 #include "cache.h"
 #include "filesys/filesys.h"
+#include <stdio.h>
+#include <string.h>
 
 
-#define NOTFOUND -1 
+
+#define NOTFOUND -1
+#define MAX_FILES 100
+#define NAME_MAX 256 
 // Định nghĩa các biến toàn cục (đã được khai báo trong cache.h)
 struct CachedBlock cache[CACHE_SIZE];
 struct list cache_LRU;
 struct lock cache_list_lock;
 static struct CacheStatistics cache_stat;
 
+
 struct CacheStatistics
 {
+  char accessed_files[MAX_FILES][NAME_MAX + 1]; // Tên các file đã ghi vào cache
+  size_t file_count; // Số lượng file đã ghi
   size_t hit_count;
   size_t miss_count;
   size_t write_count;
   size_t read_count;
 };
+
+int count = 0;
 
 static struct CacheStatistics cache_stat;
 
@@ -35,7 +45,7 @@ initialize_cache_system (void)
       list_push_back (&cache_LRU, &(cache[i].cache_elem));
     }
 
-  cache_stat = (struct CacheStatistics) {0, 0, 0, 0};
+  cache_stat = (struct CacheStatistics) { .file_count = 0, .hit_count = 0, .miss_count = 0, .write_count = 0, .read_count = 0 };
 }
 
 void 
@@ -141,6 +151,9 @@ void cache_write (struct block *fs_device, block_sector_t sector_idx, void *buff
   memcpy (&(cb->data[offset]), buffer, chunk_size);
   cb->dirty = true;
   lock_release (&cb->cache_lock);
+  printf("sector_idiidiitjtjtj");
+  // add_file_to_access_list(fs_device->name); // fs_device->name là tên thiết bị hoặc file
+
 }
 
 
@@ -183,4 +196,27 @@ size_t
 cache_read_count (void)
 {
   return cache_stat.read_count;
+}
+
+void
+add_file_to_access_list(const char *file_name)
+{
+  for (size_t i = 0; i < cache_stat.file_count; i++)
+    {
+      if (strcmp(cache_stat.accessed_files[i], file_name) == 0)
+        return; // File đã tồn tại trong danh sách
+    }
+
+  if (cache_stat.file_count < MAX_FILES)
+    {
+      strlcpy(cache_stat.accessed_files[cache_stat.file_count], file_name, NAME_MAX + 1);
+      cache_stat.file_count++;
+    }
+}
+
+
+size_t
+listing_file_access (void)
+{
+  return cache_stat.list;
 }

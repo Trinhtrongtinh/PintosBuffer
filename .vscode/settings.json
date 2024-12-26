@@ -6,6 +6,18 @@
         "string.h": "c",
         "process.h": "c",
         "exception.h": "c",
-        "*.inc": "c"
+        "*.inc": "c",
+        "cache.h": "c",
+        "*.tcc": "c",
+        "exception": "c",
+        "memory_resource": "c",
+        "iosfwd": "c",
+        "new": "c",
+        "ostream": "c",
+        "streambuf": "c",
+        "debug.h": "c",
+        "atomic": "c",
+        "string_view": "c",
+        "typeinfo": "c"
     }
 }

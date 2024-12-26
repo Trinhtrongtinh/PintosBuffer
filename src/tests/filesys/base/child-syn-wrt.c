@@ -28,6 +28,7 @@ main (int argc, char *argv[])
   seek (fd, CHUNK_SIZE * child_idx);
   CHECK (write (fd, buf + CHUNK_SIZE * child_idx, CHUNK_SIZE) > 0,
          "write \"%s\"", file_name);
+         
   msg ("close \"%s\"", file_name);
   close (fd);
 
